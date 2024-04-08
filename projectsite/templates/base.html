@@ -78,7 +78,7 @@
 										</a>
 										<a href="#">
 											<div class="notif-img"> 
-												<img src="{% static  %}" alt="Img Profile">
+												<img src="{% static 'img/profile.jpg' %}" alt="Img Profile">
 											</div>
 											<div class="notif-content">
 												<span class="block">
@@ -145,7 +145,7 @@
 							</a>
 							<div class="clearfix"></div>
 
-							<div class="collapse in" id="collapseExample" aria-expanded="true" style="">
+							<div class="collapse in" id="collapseExample" aria-expanded="true" styles="">
 								<ul class="nav">
 									<li>
 										<a href="#profile">
@@ -174,7 +174,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="components.html">
+							<a href="{% url 'organization-list' %}">
 								<i class="la la-table"></i>
 								<p>Organization</p>
 								
