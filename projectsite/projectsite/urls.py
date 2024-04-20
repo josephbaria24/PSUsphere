@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path
-from studentorg.views import HomePageView, OrganizationList, OrganizationCreateView, OrganizationUpdateView, OrganizationDeleteView, OrganizationMember, OrganizationAddMember, OrganizationUpdateMember, OrganizationDeleteMember, StudentList , StudentListAdd, StudentListUpdate, StudentListDelete, college, collegeAdd, collegeEdit, collegeDelete
+from studentorg.views import HomePageView, OrganizationList, OrganizationCreateView, OrganizationUpdateView, OrganizationDeleteView, OrganizationMember, OrganizationAddMember, OrganizationUpdateMember, OrganizationDeleteMember, StudentList , StudentListAdd, StudentListUpdate, StudentListDelete, college, collegeAdd, collegeEdit, collegeDelete, program,programAdd, programEdit, programDelete
 from studentorg import views
 from django.contrib.auth import views as auth_views
 
@@ -46,5 +46,9 @@ urlpatterns = [
     path('college/<pk>', collegeEdit.as_view(), name='college-update'),
     path('college/<pk>/delete', collegeDelete.as_view(), name='college-delete'),
 
+    path('program', program.as_view(), name='program-list'),
+    path('program/add', programAdd.as_view(), name='program-add'),
+    path('program/<pk>', programEdit.as_view(), name='program-update'),
+    path('program/<pk>/delete', programDelete.as_view(), name='program-delete'),
 
 ]
