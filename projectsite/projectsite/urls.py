@@ -14,9 +14,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from fire.views import HomePageView, ChartView, PieCountbySeverity, LineCountbyMonth, MultilineIncidentTop3Country, multipleBarbySeverity
 from django.contrib import admin
 from django.urls import path, re_path
-from studentorg.views import HomePageView, ChartView, LineCountbyMonth,MultilineIncidentTop3Country ,PieCountbySeverity, OrganizationList, OrganizationCreateView, OrganizationUpdateView, OrganizationDeleteView, OrganizationMember, OrganizationAddMember, OrganizationUpdateMember, OrganizationDeleteMember, StudentList , StudentListAdd, StudentListUpdate, StudentListDelete, college, collegeAdd, collegeEdit, collegeDelete, program,programAdd, programEdit, programDelete
+from studentorg.views import HomePageView, OrganizationList, OrganizationCreateView, OrganizationUpdateView, OrganizationDeleteView, OrganizationMember, OrganizationAddMember, OrganizationUpdateMember, OrganizationDeleteMember, StudentList , StudentListAdd, StudentListUpdate, StudentListDelete, college, collegeAdd, collegeEdit, collegeDelete, program,programAdd, programEdit, programDelete
 from studentorg import views
 from django.contrib.auth import views as auth_views
 
@@ -54,5 +55,9 @@ urlpatterns = [
     path('dashboard_chart', ChartView.as_view(), name='dashboard-chart'),
 
     path('chart/', PieCountbySeverity, name='chart'),
+
+    path('multilineChart/', MultilineIncidentTop3Country, name='chart'),
+
+    path('multiBarChart/', multipleBarbySeverity, name='chart'),
 
 ]
