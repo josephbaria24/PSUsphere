@@ -177,20 +177,19 @@ var barChart = new Chart(document.getElementById("barChart").getContext("2d"), {
     }
 });
 
-// Fetch data from the Django backend
+
 fetch("/barChart/")
     .then((response) => response.json())
     .then((data) => {
         console.log(data);
-        // Extract labels and data from the response
+
         var labels = Object.keys(data);
         var counts = Object.values(data);
 
-        // Update the chart data
+
         barChart.data.labels = labels;
         barChart.data.datasets[0].data = counts;
 
-        // Update the chart
         barChart.update();
     })
     .catch((error) => {
@@ -227,7 +226,7 @@ fetch("/barChart/")
     }
 });
 
-// Fetch data from the Django backend
+
 fetch("/doughnutChart/")
     .then((response) => response.json())
     .then((data) => {
@@ -235,11 +234,9 @@ fetch("/doughnutChart/")
         var labels = Object.keys(data);
         var counts = Object.values(data);
 
-        // Update the chart data
         doughnutChart.data.labels = labels;
         doughnutChart.data.datasets[0].data = counts;
 
-        // Update the chart
         doughnutChart.update();
     })
     .catch((error) => {
@@ -251,7 +248,7 @@ fetch("/doughnutChart/")
     var radarChart = new Chart(document.getElementById("radarChart").getContext("2d"), {
     type: 'radar',
     data: {
-        labels: [], // Empty array for labels
+        labels: [],
         datasets: [{
             label: 'Number of Students per College',
             data: [],
@@ -273,20 +270,17 @@ fetch("/doughnutChart/")
     }
 });
 
-// Fetch data from the Django backend
 fetch("/students_per_college/")
     .then((response) => response.json())
     .then((data) => {
         console.log(data);
-        // Extract labels and data from the response
+      
         var labels = Object.keys(data);
         var counts = Object.values(data);
 
-        // Update the chart data
         radarChart.data.labels = labels;
         radarChart.data.datasets[0].data = counts;
 
-        // Update the chart
         radarChart.update();
     })
     .catch((error) => {
@@ -326,7 +320,6 @@ fetch("/students_per_college/")
     }
 });
 
-// Fetch data from the Django backend
 fetch("/myRadarChart/")
     .then(response => response.json())
     .then(data => {
@@ -348,11 +341,10 @@ fetch("/myRadarChart/")
 
 
 
-// Create the polar area chart
 var polarChart = new Chart(document.getElementById("polarChart").getContext("2d"), {
     type: 'polarArea',
     data: {
-        labels: [], // Array to store program names
+        labels: [], 
         datasets: [{
             label: 'Students per Program',
             data: [],
