@@ -97,7 +97,7 @@ def students_per_program(request):
 
 
 
-#bubble chart
+
 #def students_per_college(request):
     # Query data
     queryset = Student.objects.values('program__college__college_name').annotate(student_count=Count('id'))
@@ -140,29 +140,26 @@ GROUP BY
 """)
         rows = cursor.fetchall()
 
+    # Process data
     labels = []
     counts = []
 
     for row in rows:
+        # Extract month and count from each row
         month = row[0]
         count = row[1]
 
+        # Append to lists
         labels.append(month)
         counts.append(count)
 
+    # Prepare data for chart
     chart_data = {
         'labels': labels,
         'counts': counts,
     }
 
     return JsonResponse(chart_data)
-
-
-
-
-
-
-
 
 
 

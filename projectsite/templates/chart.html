@@ -55,14 +55,14 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-5 ml-5 mt-1 mr-1">
       <div class="card">
         <div class="card-header">
           <div class="card-title">Students per College Radar Chart</div>
         </div>
         <div class="card-body">
           <div class="chart-container">
-            <canvas id="radarChart"></canvas>
+            <canvas id="radarChart" style="width: 40vw; height: 40vh"></canvas>
           </div>
         </div>
       </div>
@@ -79,7 +79,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-5 ml-5 mt-1 mr-1">
       <div class="card">
         <div class="card-header">
           <div class="card-title">Student per Program Polar Chart</div>
@@ -177,19 +177,20 @@ var barChart = new Chart(document.getElementById("barChart").getContext("2d"), {
     }
 });
 
-
+// Fetch data from the Django backend
 fetch("/barChart/")
     .then((response) => response.json())
     .then((data) => {
         console.log(data);
-
+        // Extract labels and data from the response
         var labels = Object.keys(data);
         var counts = Object.values(data);
 
-
+        // Update the chart data
         barChart.data.labels = labels;
         barChart.data.datasets[0].data = counts;
 
+        // Update the chart
         barChart.update();
     })
     .catch((error) => {
@@ -237,6 +238,7 @@ fetch("/doughnutChart/")
         doughnutChart.data.labels = labels;
         doughnutChart.data.datasets[0].data = counts;
 
+
         doughnutChart.update();
     })
     .catch((error) => {
@@ -248,7 +250,7 @@ fetch("/doughnutChart/")
     var radarChart = new Chart(document.getElementById("radarChart").getContext("2d"), {
     type: 'radar',
     data: {
-        labels: [],
+        labels: [], 
         datasets: [{
             label: 'Number of Students per College',
             data: [],
@@ -258,25 +260,38 @@ fetch("/doughnutChart/")
         }]
     },
     options: {
-      legend: {
+        legend: {
             position: "bottom",
         },
         scale: {
             ticks: {
                 beginAtZero: true
-                
+            }
+        },
+        responsive: true, 
+        maintainAspectRatio: false,
+        
+        plugins: {
+            datalabels: {
+                formatter: function(value, context) {
+                    if (window.innerWidth < 600) {
+                        return value.length > 10 ? value.substring(0, 10) + '...' : value;
+                    }
+                    return value;
+                }
             }
         }
     }
 });
 
+// Fetch data from the Django backend
 fetch("/students_per_college/")
     .then((response) => response.json())
     .then((data) => {
         console.log(data);
-      
         var labels = Object.keys(data);
         var counts = Object.values(data);
+
 
         radarChart.data.labels = labels;
         radarChart.data.datasets[0].data = counts;
@@ -286,8 +301,6 @@ fetch("/students_per_college/")
     .catch((error) => {
         console.error("Error fetching data:", error);
     });
-
-
 
     
 
@@ -341,10 +354,11 @@ fetch("/myRadarChart/")
 
 
 
+// Create the polar area chart
 var polarChart = new Chart(document.getElementById("polarChart").getContext("2d"), {
     type: 'polarArea',
     data: {
-        labels: [], 
+        labels: [], // Array to store program names
         datasets: [{
             label: 'Students per Program',
             data: [],
